@@ -54,18 +54,17 @@ public class MainWindow //extends JFrame implements ActionListener
 	{
 		text = new TextArea();
 		text.setWrapText(true);
-		text.setText("Test");
-		text.setMinHeight(150);
-		text.setMinWidth(300);
+		text.setText("Test aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa vvvvvvvvvvvvvveeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrryyyyyyyyyyyyyyyyyylllllllllloooooooooooonnnnnnnnnnnnngggggggggggstign");
+		text.setMinHeight(100);
+		text.setMinWidth(width);
 		text.setEditable(false);
 		
+		Group buttonGroup = new Group();
 		Button button = new Button("Close");
-		//button.setLayoutX(-200);
-		//button.setLayoutY(300);
+		button.setLayoutX(height - 50);
 		button.toFront();
 		EventHandler<ActionEvent> close = new EventHandler<ActionEvent>() {
-
-			
+		
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("Close application");
@@ -73,10 +72,8 @@ public class MainWindow //extends JFrame implements ActionListener
 				
 			}
 		};
-		
-		//button.addEventHandler(close);
-		
 		button.setOnAction(close);
+		buttonGroup.getChildren().add(button);
 		gui.getChildren().addAll(text, button);
 	}
 
