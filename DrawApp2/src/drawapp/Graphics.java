@@ -4,6 +4,10 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Paint;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
@@ -14,6 +18,7 @@ import javafx.scene.text.Text;
 public class Graphics {
 	
 	Color color = Color.BLACK;
+	Paint fill = Color.TRANSPARENT;
 	Group root;
 	
 	public Graphics(Group root)
@@ -26,6 +31,13 @@ public class Graphics {
 	public void setColor(Color colour) {
 		this.color = colour;	
 	}
+	
+	public void setGradientColor(Color start, Color end)
+	{
+		Stop[] stops = new Stop[] { new Stop(0, start), new Stop(1, end)};
+		LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+		this.fill = lg1;
+	}
 
 	public void drawLine(int x1, int y1, int x2, int y2) {
 		Line line = new Line(x1, y1, x2, y2);
@@ -37,7 +49,7 @@ public class Graphics {
 	public void drawRect(int x1, int y1, int x2, int y2) {
 		Rectangle rectangle = new Rectangle(x1, y1, x2, y2);
 		rectangle.setStroke(color);
-		rectangle.setFill(Color.TRANSPARENT);
+		rectangle.setFill(fill);
 		root.getChildren().add(rectangle);
 		
 	}
@@ -45,7 +57,7 @@ public class Graphics {
 	public void fillRect(int x1, int y1, int x2, int y2) {
 		Rectangle rectangle = new Rectangle(x1, y1, x2, y2);
 		rectangle.setStroke(color);
-		rectangle.setFill(color);
+		rectangle.setFill(fill);
 		root.getChildren().add(rectangle);
 		
 	}
@@ -61,7 +73,7 @@ public class Graphics {
 			int arcAngle) {
 		Arc arc = new Arc(x+width/2, y+height/2, width/2, height/2, startAngle, arcAngle);
 		arc.setStroke(color);
-		arc.setFill(Color.TRANSPARENT);
+		arc.setFill(fill);
 		root.getChildren().add(arc);
 		
 	}
@@ -69,7 +81,7 @@ public class Graphics {
 	public void drawOval(int x, int y, int width, int height) {
 		Ellipse ellipse = new Ellipse(x+width/2, y+height/2, width/2, height/2);
 		ellipse.setStroke(color);
-		ellipse.setFill(Color.TRANSPARENT);
+		ellipse.setFill(fill);
 		root.getChildren().add(ellipse);
 		
 	}
@@ -87,7 +99,7 @@ public class Graphics {
 		Polygon polygon = new Polygon();
 		polygon.getPoints().addAll(array);
 		polygon.setStroke(color);
-		polygon.setFill(Color.TRANSPARENT);
+		polygon.setFill(fill);
 		root.getChildren().add(polygon);
 	}
 

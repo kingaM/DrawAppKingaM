@@ -49,6 +49,11 @@ public class ImagePanel
 	{
 		graphics.setColor(colour);
 	}
+	
+	public void setGradientColour(Color start, Color end)
+	{
+		graphics.setGradientColor(start, end);
+	}
 
 	public void drawLine(int x1, int y1, int x2, int y2)
 	{

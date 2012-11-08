@@ -2,7 +2,12 @@ package drawapp;
 
 public class ParseException extends Exception
 {
-  public ParseException()
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+public ParseException()
   {
     super("Exception during parsing");
   }

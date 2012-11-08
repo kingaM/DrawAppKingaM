@@ -10,7 +10,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class MainWindow //extends JFrame implements ActionListener
+public class MainWindow 
 {
 	Group root;
 	Group gui;

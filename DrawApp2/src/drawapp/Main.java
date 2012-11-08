@@ -30,17 +30,18 @@ public class Main extends Application
 		height = 300;
 		width = 500;
 		init(primaryStage);
+		primaryStage.setTitle("Draw App");
+		
 		
 		ImagePanel image = new ImagePanel(height, width, root);
 		Reader reader = new InputStreamReader(System.in);
 		
 		MainWindow main = new MainWindow(root, width, height);
 		Parser parser = new Parser(reader,image,main);
-		main.buildGUI();
-		parser.parse();
 		
-		primaryStage.setTitle("Draw App");
+		main.buildGUI();
+		
+		parser.parse();
 		primaryStage.show();
-
 	}
 }
