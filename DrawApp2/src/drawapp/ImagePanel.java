@@ -1,15 +1,11 @@
 package drawapp;
 
-import java.awt.image.BufferedImage;
-
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
 public class ImagePanel
 {
-	//private BufferedImage image;
 	private Graphics graphics;
-	private Group root;
 
 	private int width, height;
 
@@ -17,9 +13,9 @@ public class ImagePanel
 	{
 		this.width = width;
 		this.height = height;
-		this.root = root;
 		graphics = new Graphics(root);
 	}
+	
 
 	/* private void setImageSize(int width, int height)
   {

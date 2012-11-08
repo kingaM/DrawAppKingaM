@@ -79,10 +79,10 @@ public class Parser
     }*/
     catch (ParseException e)
     {
-      //frame.postMessage("Parse Exception: " + e.getMessage());
+      frame.postMessage("Parse Exception: " + e.getMessage());
       return;
     }
-    //frame.postMessage("Drawing completed");
+    frame.postMessage("Drawing completed");
   }
 
   private void parseLine(String line) throws ParseException

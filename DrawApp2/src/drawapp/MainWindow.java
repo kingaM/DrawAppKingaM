@@ -2,20 +2,13 @@ package drawapp;
 
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.event.ActionEvent;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class MainWindow //extends JFrame implements ActionListener
 {
@@ -45,36 +38,50 @@ public class MainWindow //extends JFrame implements ActionListener
 	public void setGUIGroup()
 	{
 		gui = new Group();
-		gui.setTranslateX(width-300);
-		gui.setTranslateY(height-150);
+		gui.setTranslateY(height - 150);
+		gui.toFront();
 		root.getChildren().add(gui);
 	}
 
 	public void buildGUI()
 	{
+		Rectangle rect = new Rectangle(width, 150);
+		rect.setFill(Color.LIGHTGRAY);
+		gui.getChildren().add(rect);
+		
 		text = new TextArea();
+		text.setStyle("-fx-background-color: lightgray;");
 		text.setWrapText(true);
-		text.setText("Test aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa vvvvvvvvvvvvvveeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrryyyyyyyyyyyyyyyyyylllllllllloooooooooooonnnnnnnnnnnnngggggggggggstign");
-		text.setMinHeight(100);
-		text.setMinWidth(width);
+		text.setPrefHeight(120);
+		text.setPrefWidth(width);
 		text.setEditable(false);
 		
-		Group buttonGroup = new Group();
 		Button button = new Button("Close");
-		button.setLayoutX(height - 50);
+		button.setPrefHeight(20);
+		System.out.println(button.getPrefHeight());
+		button.setLayoutY(150 - button.getPrefHeight() - 10);
 		button.toFront();
 		EventHandler<ActionEvent> close = new EventHandler<ActionEvent>() {
 		
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("Close application");
-				Platform.exit();
-				
+				Platform.exit();		
 			}
 		};
 		button.setOnAction(close);
-		buttonGroup.getChildren().add(button);
 		gui.getChildren().addAll(text, button);
+		gui.toFront();
+	}
+	
+	public void setText(String s)
+	{
+		
+	}
+
+	public void postMessage(String s) {
+		text.setText(s);
+		
 	}
 
 

@@ -15,7 +15,9 @@ public class Graphics {
 	
 	public Graphics(Group root)
 	{
-		this.root = root;
+		this.root = new Group();
+		root.getChildren().add(this.root);
+		this.root.toBack();
 	}
 
 	public void setColor(Color colour) {
