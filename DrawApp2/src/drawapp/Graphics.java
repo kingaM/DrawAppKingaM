@@ -1,6 +1,8 @@
 package drawapp;
 
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Ellipse;
@@ -68,6 +70,15 @@ public class Graphics {
 		ellipse.setStroke(color);
 		ellipse.setFill(Color.TRANSPARENT);
 		root.getChildren().add(ellipse);
+		
+	}
+
+	public void drawImage(int x, int y, int width, int height, String path) {
+		System.out.println(x + " " + y + " " + width + " " + height);
+		ImageView image = new ImageView(new Image(path, width, height, false, false));
+		image.setLayoutX(x);
+		image.setLayoutY(y);
+		root.getChildren().add(image);
 		
 	}
 

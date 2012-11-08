@@ -79,4 +79,9 @@ public class ImagePanel
 	{
 		graphics.drawOval(x,y,width,height);
 	}
+
+	public void drawImage(int x, int y, int width, int height, String path) {
+		graphics.drawImage(x, y, width, height, path);
+		
+	}
 }

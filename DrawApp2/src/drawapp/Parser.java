@@ -38,7 +38,8 @@ public class Parser
     	String[] lines = {
     			"DO 30 30 100 150",
     			"DO 0 0 499 299",
-    			"DA 100 100 90 120 0 180"
+    			"DA 100 100 90 120 0 180",
+    			"DI 0 0 100 100 @http://java.com/images/jv0h.jpg"
     			
     			/*"DL 40 250 290 250",
     			"DL 40 250 40 50",
@@ -68,6 +69,7 @@ public class Parser
     	};
     	
     	for(String s : lines) {
+    		frame.postMessage("Now drawing: " + s);
     		parseLine(s);
     	}
     	
@@ -96,6 +98,7 @@ public class Parser
     if (command.equals("DS")) { drawString(line.substring(3, line.length())); return; }
     if (command.equals("DA")) { drawArc(line.substring(2, line.length())); return; }
     if (command.equals("DO")) { drawOval(line.substring(2, line.length())); return; }
+    if (command.equals("DI")) { drawImage(line.substring(2, line.length())); return; }
 
 
     throw new ParseException("Unknown drawing command");
@@ -211,6 +214,24 @@ public class Parser
     if (colourName.equals("yellow")) { image.setColour(Color.YELLOW); return;}
     throw new ParseException("Invalid colour name");
   }
+  
+  private void drawImage(String args) throws ParseException
+  {
+    int x = 0;
+    int y = 0 ;
+    int width = 0;
+    int height = 0;
+    String path = "";
+    StringTokenizer tokenizer = new StringTokenizer(args);
+    x = getInteger(tokenizer);
+    y = getInteger(tokenizer);
+    width = getInteger(tokenizer);
+    height = getInteger(tokenizer);
+    int position = args.indexOf("@");
+    if (position == -1) throw new ParseException("DrawString string is missing");
+    path = args.substring(position+1,args.length());
+    image.drawImage(x, y, width, height, path);
+  }
 
   private int getInteger(StringTokenizer tokenizer) throws ParseException
   {
@@ -219,4 +240,5 @@ public class Parser
     else
       throw new ParseException("Missing Integer value");
   }
+  
 }
