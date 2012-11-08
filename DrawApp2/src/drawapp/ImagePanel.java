@@ -84,4 +84,10 @@ public class ImagePanel
 		graphics.drawImage(x, y, width, height, path);
 		
 	}
+
+
+	public void drawPolygon(Double[] array) {
+		graphics.drawPolygon(array);
+		
+	}
 }

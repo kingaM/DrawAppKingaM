@@ -4,6 +4,8 @@ package drawapp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -36,10 +38,10 @@ public class Parser
       */
     	
     	String[] lines = {
-    			"DO 30 30 100 150",
+    			/*"DO 30 30 100 150",
     			"DO 0 0 499 299",
-    			"DA 100 100 90 120 0 180",
-    			"DI 0 0 100 100 @http://java.com/images/jv0h.jpg"
+    			"DA 100 100 90 120 0 180",*/
+    			"DI 0.0 0.0 10.0 10.0 30.0 0.0"
     			
     			/*"DL 40 250 290 250",
     			"DL 40 250 40 50",
@@ -98,8 +100,8 @@ public class Parser
     if (command.equals("DS")) { drawString(line.substring(3, line.length())); return; }
     if (command.equals("DA")) { drawArc(line.substring(2, line.length())); return; }
     if (command.equals("DO")) { drawOval(line.substring(2, line.length())); return; }
-    if (command.equals("DI")) { drawImage(line.substring(2, line.length())); return; }
-
+   // if (command.equals("DI")) { drawImage(line.substring(2, line.length())); return; }
+    if (command.equals("DI")) { drawPolygon(line.substring(2, line.length())); return; }
 
     throw new ParseException("Unknown drawing command");
   }
@@ -228,10 +230,18 @@ public class Parser
     width = getInteger(tokenizer);
     height = getInteger(tokenizer);
     int position = args.indexOf("@");
-    if (position == -1) throw new ParseException("DrawString string is missing");
+    if (position == -1) throw new ParseException("Image path is missing");
     path = args.substring(position+1,args.length());
     image.drawImage(x, y, width, height, path);
   }
+  
+  private void drawPolygon(String args) throws ParseException 
+  {
+	  StringTokenizer tokenizer = new StringTokenizer(args);
+	  Double[] array = getDoubleArray(tokenizer);
+	  image.drawPolygon(array);
+  }
+
 
   private int getInteger(StringTokenizer tokenizer) throws ParseException
   {
@@ -239,6 +249,24 @@ public class Parser
       return Integer.parseInt(tokenizer.nextToken());
     else
       throw new ParseException("Missing Integer value");
+  }
+  
+  private Double[] getDoubleArray(StringTokenizer tokenizer) throws ParseException
+  {
+	  ArrayList<Double> arrayList = new ArrayList<Double>();
+	  if(tokenizer.countTokens() < 2)
+	  {
+		  throw new ParseException("Too little values in the array");
+	  }
+	  while(tokenizer.hasMoreTokens()) {
+		  double d = Double.parseDouble(tokenizer.nextToken());
+		  arrayList.add(d );
+		  System.out.println(d);
+	  }
+	  Double[] array = new Double[arrayList.size()];
+	  arrayList.toArray(array);
+	  return array;
+		  
   }
   
 }

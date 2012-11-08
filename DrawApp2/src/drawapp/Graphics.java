@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
@@ -80,6 +81,14 @@ public class Graphics {
 		image.setLayoutY(y);
 		root.getChildren().add(image);
 		
+	}
+
+	public void drawPolygon(Double[] array) {
+		Polygon polygon = new Polygon();
+		polygon.getPoints().addAll(array);
+		polygon.setStroke(color);
+		polygon.setFill(Color.TRANSPARENT);
+		root.getChildren().add(polygon);
 	}
 
 }
