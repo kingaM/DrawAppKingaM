@@ -19,9 +19,9 @@ public class Main extends Application
 	}
 	
 	private void init(Stage primaryStage) {
-		root = new Group();
+		
 		primaryStage.setResizable(false);
-		primaryStage.setScene(new Scene(root, width, height));
+		primaryStage.setScene(new Scene(root, Dimensions.getWidth(), Dimensions.getHeight()));
 	}
 	
 
@@ -29,19 +29,20 @@ public class Main extends Application
 	public void start(Stage primaryStage) throws Exception {
 		height = 300;
 		width = 500;
-		init(primaryStage);
-		primaryStage.setTitle("Draw App");
-		
-		
-		ImagePanel image = new ImagePanel(height, width, root);
+		root = new Group();
+		ImagePanel image = new ImagePanel(Dimensions.getHeight(), Dimensions.getWidth(), root, primaryStage);
 		Reader reader = new InputStreamReader(System.in);
 		
-		MainWindow main = new MainWindow(root, width, height);
+		MainWindow main = new MainWindow(root);
 		Parser parser = new Parser(reader,image,main);
-		
-		main.buildGUI();
-		
 		parser.parse();
+		parser.getDimensions();
+		
+		init(primaryStage);
+		primaryStage.setTitle("Draw App");
+
+		main.buildGUI();
 		primaryStage.show();
+		parser.draw();
 	}
 }

@@ -2,6 +2,7 @@ package drawapp;
 
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -13,6 +14,7 @@ public class Parser
 	private BufferedReader reader;
 	private ImagePanel image;
 	private MainWindow frame;
+	private ArrayList<String> ccode = new ArrayList<String>();
 
 	public Parser(Reader reader, ImagePanel image, MainWindow frame)
 	{
@@ -23,25 +25,31 @@ public class Parser
 
 	public void parse()
 	{
-		try
-		{
-		/*String line = reader.readLine();
+	//	try
+	//	{
+			/*String line = reader.readLine();
+			ccode.add(line);
 
-      while (line != null)
-      {
-        parseLine(line);
-        line = reader.readLine();
-      }
-		 */
+			while (line != null)
+			{
+				//parseLine(line);
+				line = reader.readLine();
+				ccode.add(line);
+			}*/
 
-		String[] lines = {
-				"GC white yellow",
-				"DO 30 30 100 150",
-    			"DO 0 0 499 299",
-    			"DA 100 100 90 120 0 180",
-				"DP 0.0 0.0 10.0 10.0 30.0 0.0"
 
-				/*"DL 40 250 290 250",
+				String[] lines = {
+						"600 600",
+					"GC white yellow",
+					"DO 30 30 100 150",
+					"DO 0 0 499 299",
+					"DA 100 100 90 120 0 180",
+					"CFC",
+					"DP 0.0 0.0 10.0 10.0 30.0 0.0" };
+				
+				for(String s : lines)
+					ccode.add(s);
+					/*"DL 40 250 290 250",
     			"DL 40 250 40 50",
     			"DS 50 270 @CDs",
     			"DS 98 270 @DVDs",
@@ -66,27 +74,49 @@ public class Parser
     			"FR 190 155 50 95",
     			"SC magenta",
     			"FR 240 110 50 140" */
-		};
+			//};
 
-		for(final String s : lines) {
-				parseLine(s);
-		}
-		
-		
-
-		}
-	catch (ParseException e)
+			//	for(final String s : lines) {
+			//		parseLine(s);
+			//	}
+		//}
+	/*	catch (ParseException e)
 		{
 			frame.postMessage("Parse Exception: " + e.getMessage());
 			return;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		frame.postMessage("Drawing completed");
+		//frame.postMessage("Drawing completed");*/
+	}
+	
+	public void getDimensions() throws ParseException
+	{
+		String s = ccode.get(0);
+		StringTokenizer tokenizer = new StringTokenizer(s);
+		Dimensions.setHeight(getInteger(tokenizer));
+		Dimensions.setWidth(getInteger(tokenizer));
+		ccode.remove(0);
+	}
+	
+	public void draw()
+	{
+		for(String s : ccode)
+		{
+			try {
+				parseLine(s);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
 	}
 
 	private void parseLine(String line) throws ParseException
 	{
 		if (line.length() < 2) return;
-		String command = line.substring(0, 2);
+		String command = line.split(" ")[0];
 		if (command.equals("DL")) { drawLine(line.substring(2,line.length())); return; }
 		if (command.equals("DR")) { drawRect(line.substring(2, line.length())); return; }
 		if (command.equals("FR")) { fillRect(line.substring(2, line.length())); return; }
@@ -97,6 +127,8 @@ public class Parser
 		if (command.equals("DI")) { drawImage(line.substring(2, line.length())); return; }
 		if (command.equals("DP")) { drawPolygon(line.substring(2, line.length())); return; }
 		if (command.equals("GC")) { setGradientColour(line.substring(2, line.length())); return; }
+		if (command.equals("CFC")) { clearFillColour(); return; }
+		if (command.equals("CSC")) { clearClour(); return; }
 		throw new ParseException("Unknown drawing command");
 	}
 
@@ -192,18 +224,28 @@ public class Parser
 		s = args.substring(position+1,args.length());
 		image.drawString(x,y,s);
 	}
-	
+
 	private void setColour(String colourName) throws ParseException
 	{
 		image.setColour(getColour(colourName));
 	}
-	
+
 	private void setGradientColour(String args) throws ParseException
 	{
 		StringTokenizer tokenizer = new StringTokenizer(args);
 		Color start = getColour(tokenizer.nextToken());
 		Color end = getColour(tokenizer.nextToken());
 		image.setGradientColour(start, end);
+	}
+
+	private void clearFillColour()
+	{
+		image.setGradientColour(Color.TRANSPARENT, Color.TRANSPARENT);	
+	}
+
+	private void clearClour()
+	{
+		image.setColour(Color.BLACK);
 	}
 
 	private Color getColour(String colourName) throws ParseException
@@ -249,13 +291,6 @@ public class Parser
 		Double[] array = getDoubleArray(tokenizer);
 		image.drawPolygon(array);
 	}
-	
-	private void colorGradient(String args) throws ParseException
-	{
-		StringTokenizer tokenizer = new StringTokenizer(args);
-		
-	}
-
 
 	private int getInteger(StringTokenizer tokenizer) throws ParseException
 	{

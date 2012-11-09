@@ -32,28 +32,24 @@ public class MainWindow
 		this.root = root;
 		this.width = width;
 		this.height = height;
-		setGUIGroup();
-	}
-
-	public void setGUIGroup()
-	{
-		gui = new Group();
-		gui.setTranslateY(height - 150);
-		gui.toFront();
-		root.getChildren().add(gui);
 	}
 
 	public void buildGUI()
 	{
-		Rectangle rect = new Rectangle(width, 150);
+		gui = new Group();
+		gui.setTranslateY(Dimensions.getHeight() - 150);
+		gui.toFront();
+		root.getChildren().add(gui);
+		
+		Rectangle rect = new Rectangle(Dimensions.getWidth(), 150);
 		rect.setFill(Color.LIGHTGRAY);
 		gui.getChildren().add(rect);
 		
 		text = new TextArea();
-		text.setStyle("-fx-background-color: lightgray;");
+		//text.setStyle("-fx-background-color: lightgray;");
 		text.setWrapText(true);
-		text.setPrefHeight(120);
-		text.setPrefWidth(width);
+		text.setPrefHeight(110);
+		text.setPrefWidth(Dimensions.getWidth());
 		text.setEditable(false);
 		
 		Button button = new Button("Close");
@@ -65,18 +61,12 @@ public class MainWindow
 		
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Close application");
 				Platform.exit();		
 			}
 		};
 		button.setOnAction(close);
 		gui.getChildren().addAll(text, button);
 		gui.toFront();
-	}
-	
-	public void setText(String s)
-	{
-		
 	}
 
 	public void postMessage(String s) {
