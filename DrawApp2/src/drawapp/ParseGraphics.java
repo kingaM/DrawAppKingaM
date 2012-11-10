@@ -32,7 +32,6 @@ public class ParseGraphics extends Parser{
 
 	private void parseLine(String line) throws ParseException
 	{
-		if (line.length() < 2) return;
 		String command = line.split(" ")[0];
 		if (command.equals("DL")) { drawLine(line.substring(2,line.length())); return; }
 		if (command.equals("DR")) { drawRect(line.substring(2, line.length())); return; }
@@ -164,8 +163,6 @@ public class ParseGraphics extends Parser{
 	{
 		image.setColor(Color.BLACK);
 	}
-
-	
 
 	private void drawImage(String args) throws ParseException
 	{

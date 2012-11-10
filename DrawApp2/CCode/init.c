@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "init.h"
 
 void setDimensions(int height, int width)

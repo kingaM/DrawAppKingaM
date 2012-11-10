@@ -11,4 +11,5 @@ void drawString(char*,int,int);
 void setColour(colour);
 void getColour(colour c, char *);
 void drawPolygon(double[], int);
+void drawImage(int, int, int, int, char[]);
 void setFillColour(colour c1, colour c2);

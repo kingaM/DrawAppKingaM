@@ -41,6 +41,7 @@ public class Graphics {
 
 	public void drawLine(double oldx, double oldy, double x, double y) {
 		Line line = new Line(oldx, oldy, x, y);
+		line.setStroke(color);
 		line.setFill(color);
 		root.getChildren().add(line);
 		

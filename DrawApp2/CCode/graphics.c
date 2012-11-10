@@ -44,6 +44,11 @@ void drawPolygon(double d[], int length)
 	printf("\n");
 }
 
+void drawImage(int x, int y, int width, int height, char[] path)
+{
+	printf("DI %i %i %i %i %s\n", x, y, width, height, path);
+}
+
 void setColour(colour c)
 {
 	char* colourName = malloc(sizeof(char)*10);
