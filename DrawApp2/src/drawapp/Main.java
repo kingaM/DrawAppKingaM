@@ -26,10 +26,8 @@ public class Main extends Application
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		height = 300;
-		width = 500;
 		root = new Group();
-		ImagePanel image = new ImagePanel(Dimensions.getHeight(), Dimensions.getWidth(), root, primaryStage);
+		Graphics image = new Graphics(root);
 		Reader reader = new InputStreamReader(System.in);
 		
 		MainWindow main = new MainWindow(root);

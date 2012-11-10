@@ -7,17 +7,15 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import javafx.scene.paint.Color;
-
 public class IntialParser extends Parser
 {
 	private BufferedReader reader;
-	private ImagePanel image;
+	private Graphics image;
 	private MainWindow frame;
 	private ArrayList<String> ccode = new ArrayList<String>();
 	private Turtle turtle;
 
-	public IntialParser(Reader reader, ImagePanel image, MainWindow frame, Turtle turtle)
+	public IntialParser(Reader reader, Graphics image, MainWindow frame, Turtle turtle)
 	{
 		this.reader = new BufferedReader(reader);
 		this.image = image;
@@ -41,23 +39,23 @@ public class IntialParser extends Parser
 
 
 				String[] lines = {
-				/*		"600 600",
+						"600 600",
 						"G",
 					"GC white yellow",
 					"DO 30 30 100 150",
 					"DO 0 0 499 299",
 					"DA 100 100 90 120 0 180",
 					"CFC",
-					"DP 0.0 0.0 10.0 10.0 30.0 0.0" };*/
+					"DP 0.0 0.0 10.0 10.0 30.0 0.0" };
 						
-						"600 600",
+					/*	"600 600",
 						"T",
 						"PD",
 						"GF 10",
 						"TL 30",
 						"GF 20",
 						"TR 40",
-						"GF 20" };
+						"GF 20" };*/
 				
 				for(String s : lines)
 					ccode.add(s);

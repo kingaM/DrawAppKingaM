@@ -8,9 +8,9 @@ import javafx.scene.paint.Color;
 public class ParseGraphics extends Parser{
 	
 	private ArrayList<String> ccode = new ArrayList<String>();
-	ImagePanel image;
+	Graphics image;
 	
-	public ParseGraphics(ArrayList<String> ccode, ImagePanel image)
+	public ParseGraphics(ArrayList<String> ccode, Graphics image)
 	{
 		this.ccode = ccode;
 		this.image = image;
@@ -139,12 +139,12 @@ public class ParseGraphics extends Parser{
 		int position = args.indexOf("@");
 		if (position == -1) throw new ParseException("DrawString string is missing");
 		s = args.substring(position+1,args.length());
-		image.drawString(x,y,s);
+		image.drawString(s, x, y);
 	}
 
 	private void setColour(String colourName) throws ParseException
 	{
-		image.setColour(getColour(colourName));
+		image.setColor(getColour(colourName));
 	}
 
 	private void setGradientColour(String args) throws ParseException
@@ -152,17 +152,17 @@ public class ParseGraphics extends Parser{
 		StringTokenizer tokenizer = new StringTokenizer(args);
 		Color start = getColour(tokenizer.nextToken());
 		Color end = getColour(tokenizer.nextToken());
-		image.setGradientColour(start, end);
+		image.setGradientColor(start, end);
 	}
 
 	private void clearFillColour()
 	{
-		image.setGradientColour(Color.TRANSPARENT, Color.TRANSPARENT);	
+		image.setGradientColor(Color.TRANSPARENT, Color.TRANSPARENT);	
 	}
 
 	private void clearClour()
 	{
-		image.setColour(Color.BLACK);
+		image.setColor(Color.BLACK);
 	}
 
 	
