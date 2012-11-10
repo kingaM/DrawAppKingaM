@@ -19,7 +19,6 @@ public class Main extends Application
 	}
 	
 	private void init(Stage primaryStage) {
-		
 		primaryStage.setResizable(false);
 		primaryStage.setScene(new Scene(root, Dimensions.getWidth(), Dimensions.getHeight()));
 	}
@@ -34,15 +33,14 @@ public class Main extends Application
 		Reader reader = new InputStreamReader(System.in);
 		
 		MainWindow main = new MainWindow(root);
-		Parser parser = new Parser(reader,image,main);
+		Turtle turtle = new Turtle(root);
+		Parser parser = new Parser(reader,image,main, turtle);
 		parser.parse();
-		parser.getDimensions();
 		
 		init(primaryStage);
 		primaryStage.setTitle("Draw App");
 
 		main.buildGUI();
 		primaryStage.show();
-		parser.draw();
 	}
 }

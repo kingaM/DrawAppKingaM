@@ -39,8 +39,8 @@ public class Graphics {
 		this.fill = lg1;
 	}
 
-	public void drawLine(int x1, int y1, int x2, int y2) {
-		Line line = new Line(x1, y1, x2, y2);
+	public void drawLine(double oldx, double oldy, double x, double y) {
+		Line line = new Line(oldx, oldy, x, y);
 		line.setFill(color);
 		root.getChildren().add(line);
 		
