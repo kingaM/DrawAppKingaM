@@ -7,7 +7,7 @@ public class Turtle {
 	private double x, y;     // turtle is at (x, y)
 	private double angle;    // facing this many degrees counterclockwise from the x-axis
 	private Graphics graphics;
-	private Color color;
+	private Color color = Color.BLACK;
 
 	// start at (x0, y0), facing a0 degrees counterclockwise from the x-axis
 	public Turtle(Group root) {

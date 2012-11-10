@@ -1,114 +1,52 @@
 package drawapp;
 
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import javafx.scene.paint.Color;
 
-public class Parser
-{
-	private BufferedReader reader;
-	private ImagePanel image;
-	private MainWindow frame;
-	private ArrayList<String> ccode = new ArrayList<String>();
-	private Turtle turtle;
+public class Parser {
 
-	public Parser(Reader reader, ImagePanel image, MainWindow frame, Turtle turtle)
-	{
-		this.reader = new BufferedReader(reader);
-		this.image = image;
-		this.frame = frame;
-		this.turtle = turtle;
-	}
-
-	public void parse() throws ParseException
-	{
-	//	try
-	//	{
-			/*String line = reader.readLine();
-			ccode.add(line);
-
-			while (line != null)
-			{
-				//parseLine(line);
-				line = reader.readLine();
-				ccode.add(line);
-			}*/
-
-
-				String[] lines = {
-				/*		"600 600",
-						"G",
-					"GC white yellow",
-					"DO 30 30 100 150",
-					"DO 0 0 499 299",
-					"DA 100 100 90 120 0 180",
-					"CFC",
-					"DP 0.0 0.0 10.0 10.0 30.0 0.0" };*/
-						
-						"600 600",
-						"T",
-						"PD",
-						"GF 10",
-						"TL 30",
-						"GF 20",
-						"TR 40",
-						"GF 20" };
-				
-				for(String s : lines)
-					ccode.add(s);
-				getDimensions();
-				graphicsOrTurtle();
-			//};
-
-			//	for(final String s : lines) {
-			//		parseLine(s);
-			//	}
-		//}
-	/*	catch (ParseException e)
-		{
-			frame.postMessage("Parse Exception: " + e.getMessage());
-			return;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//frame.postMessage("Drawing completed");*/
-	}
-	
-	public void getDimensions() throws ParseException
-	{
-		String s = ccode.get(0);
-		StringTokenizer tokenizer = new StringTokenizer(s);
-		Dimensions.setHeight(getInteger(tokenizer));
-		Dimensions.setWidth(getInteger(tokenizer));
-		ccode.remove(0);
-	}
-	
-	public void graphicsOrTurtle() 
-	{
-		String s = ccode.get(0);
-		if(s.equals("T"))
-		{
-			turtle.setInitialPosition(100, 100, 0);
-			new ParseTurtle(ccode, turtle);
-		}
-		if(s.equals("G"))
-		{
-			 new ParseGraphics(ccode, image);
-		}
-	}
-	
-	private int getInteger(StringTokenizer tokenizer) throws ParseException
+	protected int getInteger(StringTokenizer tokenizer) throws ParseException
 	{
 		if (tokenizer.hasMoreTokens())
 			return Integer.parseInt(tokenizer.nextToken());
 		else
 			throw new ParseException("Missing Integer value");
 	}
-
+	
+	protected Color getColour(String colourName) throws ParseException
+	{
+		if (colourName.equals("black")) { return Color.BLACK; }
+		if (colourName.equals("blue")) { return Color.BLUE;}
+		if (colourName.equals("cyan")) { return Color.CYAN;}
+		if (colourName.equals("darkgray")) { return Color.DARKGRAY;}
+		if (colourName.equals("gray")) { return Color.GRAY;}
+		if (colourName.equals("green")) { return Color.GREEN;}
+		if (colourName.equals("lightgray")) { return Color.LIGHTGRAY;}
+		if (colourName.equals("magenta")) { return Color.MAGENTA;}
+		if (colourName.equals("orange")) { return Color.ORANGE;}
+		if (colourName.equals("pink")) { return Color.PINK;}
+		if (colourName.equals("red")) { return Color.RED;}
+		if (colourName.equals("white")) { return Color.WHITE;}
+		if (colourName.equals("yellow")) { return Color.YELLOW;}
+		if (colourName.equals("transparent")) { return Color.TRANSPARENT;}
+		throw new ParseException("Invalid colour name");
+	}
+	
+	protected Double[] getDoubleArray(StringTokenizer tokenizer) throws ParseException
+	{
+		ArrayList<Double> arrayList = new ArrayList<Double>();
+		if(tokenizer.countTokens() < 2) {
+			throw new ParseException("Too little values in the array");
+		}
+		while(tokenizer.hasMoreTokens()) {
+			double d = Double.parseDouble(tokenizer.nextToken());
+			arrayList.add(d );
+			System.out.println(d);
+		}
+		Double[] array = new Double[arrayList.size()];
+		arrayList.toArray(array);
+		return array;
+	}
 }

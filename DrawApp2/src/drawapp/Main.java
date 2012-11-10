@@ -34,7 +34,7 @@ public class Main extends Application
 		
 		MainWindow main = new MainWindow(root);
 		Turtle turtle = new Turtle(root);
-		Parser parser = new Parser(reader,image,main, turtle);
+		IntialParser parser = new IntialParser(reader,image,main, turtle);
 		parser.parse();
 		
 		init(primaryStage);
