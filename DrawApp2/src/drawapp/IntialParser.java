@@ -28,6 +28,7 @@ public class IntialParser extends Parser
 		"600 600",
 		"T 100 100 30",
 		"PD",
+		"LALALAL",
 		"GF 10",
 		"TL 30",
 		"GF 20",
@@ -61,7 +62,7 @@ public class IntialParser extends Parser
 		ccode.remove(0);
 	}
 
-	public Parser graphicsOrTurtle() 
+	public Parser graphicsOrTurtle() throws ParseException 
 	{
 		String s = ccode.get(0);
 		ccode.remove(0);
@@ -75,7 +76,7 @@ public class IntialParser extends Parser
 		{
 			return new ParseGraphics(ccode, image);
 		}	
-		new ParseException("Unknown mode");
+		new ParseException("Unknown mode:" + s);
 		return null;
 	}
 

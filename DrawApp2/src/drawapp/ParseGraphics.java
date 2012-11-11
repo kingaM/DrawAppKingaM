@@ -10,23 +10,18 @@ public class ParseGraphics extends Parser{
 	private ArrayList<String> ccode = new ArrayList<String>();
 	private Graphics image;
 	
-	public ParseGraphics(ArrayList<String> ccode, Graphics image)
+	public ParseGraphics(ArrayList<String> ccode, Graphics image) throws ParseException
 	{
 		this.ccode = ccode;
 		this.image = image;
 		draw();
 	}
 	
-	public void draw()
+	public void draw() throws ParseException
 	{
 		for(String s : ccode)
 		{
-			try {
 				parseLine(s);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
 		}
 	}
 
@@ -45,7 +40,7 @@ public class ParseGraphics extends Parser{
 		if (command.equals("GC")) { setGradientColour(line.substring(2, line.length())); return; }
 		if (command.equals("CFC")) { clearFillColour(); return; }
 		if (command.equals("CSC")) { clearClour(); return; }
-		throw new ParseException("Unknown drawing command");
+		throw new ParseException("Unknown drawing command: " + line);
 	}
 
 	private void drawLine(String args) throws ParseException

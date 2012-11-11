@@ -8,33 +8,15 @@ public class ParseTurtle extends Parser {
 	private ArrayList<String> ccode = new ArrayList<String>();
 	Turtle turtle;
 
-	public ParseTurtle(ArrayList<String> ccode, Turtle turtle) {
+	public ParseTurtle(ArrayList<String> ccode, Turtle turtle) throws ParseException {
 		this.ccode = ccode;
 		this.turtle = turtle;
 		draw();
 	}
-	
-	public void drawNext() {
-		if(!ccode.isEmpty()) {
-			System.out.println("I am here");
-			try {
-				parseLine(ccode.get(0));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			ccode.remove(0);
-		}
-	}
 
-	public void draw() {
+	public void draw() throws ParseException {
 		for (String s : ccode) {
-			try {
 				parseLine(s);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -68,7 +50,7 @@ public class ParseTurtle extends Parser {
 			return;
 		}
 
-		throw new ParseException("Unknown drawing command");
+		throw new ParseException("Unknown drawing command: " + line);
 	}
 
 	private void turnLeft(String substring) throws ParseException {

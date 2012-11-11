@@ -3,34 +3,9 @@ package drawapp;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 public class Parser {
-	
-	public void drawNext()
-	{
-		
-	}
-
-	protected void nextStep() {
-		Button button = new Button("Close");
-		button.setPrefHeight(20);
-		System.out.println(button.getPrefHeight());
-		button.setLayoutY(150 - button.getPrefHeight() - 10);
-		button.toFront();
-		EventHandler<ActionEvent> close = new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				Platform.exit();		
-			}
-		};
-		button.setOnAction(close);
-	}
 
 	protected int getInteger(StringTokenizer tokenizer) throws ParseException
 	{
@@ -56,7 +31,7 @@ public class Parser {
 		if (colourName.equals("white")) { return Color.WHITE;}
 		if (colourName.equals("yellow")) { return Color.YELLOW;}
 		if (colourName.equals("transparent")) { return Color.TRANSPARENT;}
-		throw new ParseException("Invalid colour name");
+		throw new ParseException("Invalid colour name: " + colourName);
 	}
 
 	protected Double[] getDoubleArray(StringTokenizer tokenizer) throws ParseException
@@ -67,7 +42,7 @@ public class Parser {
 		}
 		while(tokenizer.hasMoreTokens()) {
 			double d = Double.parseDouble(tokenizer.nextToken());
-			arrayList.add(d );
+			arrayList.add(d);
 			System.out.println(d);
 		}
 		Double[] array = new Double[arrayList.size()];

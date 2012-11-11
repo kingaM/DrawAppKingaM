@@ -37,13 +37,20 @@ public class Main extends Application
 			parser.parse();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
+			main.postMessage(e.getMessage());
 			e.printStackTrace();
 		}
 		primaryStage.setResizable(false);
 		primaryStage.setScene(new Scene(root, Dimensions.getWidth(), Dimensions.getHeight()));
 		main.buildGUI();
 		
-		Parser mode = parser.graphicsOrTurtle();
+		try {
+			Parser mode = parser.graphicsOrTurtle();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			main.postMessage(e.getMessage());
+			e.printStackTrace();
+		}
 		//mode.drawNext();
 		primaryStage.setTitle("Draw App");
 		primaryStage.show();

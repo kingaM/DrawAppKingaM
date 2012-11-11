@@ -162,7 +162,7 @@ public class Graphics {
 			root.getChildren().remove(nodes.get(i));
 			s = commands.get(i-1);
 		}
-		if(i == 1) {
+		else if(i == 1) {
 			root.getChildren().remove(nodes.get(i));
 			s = commands.get(i-1);
 			i--;
