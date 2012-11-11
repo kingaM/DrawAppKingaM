@@ -10,8 +10,8 @@ public class Turtle {
 	private Color color = Color.BLACK;
 
 	// start at (x0, y0), facing a0 degrees counterclockwise from the x-axis
-	public Turtle(Group root) {
-		graphics = new Graphics(root);
+	public Turtle(Group root, Graphics image) {
+		graphics = image;
 	}
 	
 	public void setInitialPosition(double x0, double y0, double a0) {

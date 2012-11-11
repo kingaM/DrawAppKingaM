@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 public class ParseGraphics extends Parser{
 	
 	private ArrayList<String> ccode = new ArrayList<String>();
-	Graphics image;
+	private Graphics image;
 	
 	public ParseGraphics(ArrayList<String> ccode, Graphics image)
 	{
@@ -188,8 +188,5 @@ public class ParseGraphics extends Parser{
 		Double[] array = getDoubleArray(tokenizer);
 		image.drawPolygon(array);
 	}
-
-
-	
 
 }

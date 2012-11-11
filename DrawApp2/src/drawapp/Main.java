@@ -4,8 +4,11 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class Main extends Application
@@ -19,26 +22,36 @@ public class Main extends Application
 	}
 	
 	private void init(Stage primaryStage) {
+		root = new Group();
+		Group graphics = new Group();
+		root.getChildren().add(graphics);
+		
+		Graphics image = new Graphics(graphics);
+		Reader reader = new InputStreamReader(System.in);
+		
+		MainWindow main = new MainWindow(graphics, image);
+		
+		Turtle turtle = new Turtle(graphics, image);
+		IntialParser parser = new IntialParser(reader,image,main, turtle);
+		try {
+			parser.parse();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		primaryStage.setResizable(false);
 		primaryStage.setScene(new Scene(root, Dimensions.getWidth(), Dimensions.getHeight()));
+		main.buildGUI();
+		
+		Parser mode = parser.graphicsOrTurtle();
+		//mode.drawNext();
+		primaryStage.setTitle("Draw App");
+		primaryStage.show();
 	}
 	
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		root = new Group();
-		Graphics image = new Graphics(root);
-		Reader reader = new InputStreamReader(System.in);
-		
-		MainWindow main = new MainWindow(root);
-		Turtle turtle = new Turtle(root);
-		IntialParser parser = new IntialParser(reader,image,main, turtle);
-		parser.parse();
-		
 		init(primaryStage);
-		primaryStage.setTitle("Draw App");
-
-		main.buildGUI();
-		primaryStage.show();
 	}
 }

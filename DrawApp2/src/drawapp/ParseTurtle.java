@@ -13,6 +13,19 @@ public class ParseTurtle extends Parser {
 		this.turtle = turtle;
 		draw();
 	}
+	
+	public void drawNext() {
+		if(!ccode.isEmpty()) {
+			System.out.println("I am here");
+			try {
+				parseLine(ccode.get(0));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ccode.remove(0);
+		}
+	}
 
 	public void draw() {
 		for (String s : ccode) {
