@@ -26,7 +26,8 @@ public class Graphics {
 	private Group root;
 	private ArrayList<Node> nodes = new ArrayList<Node>();
 	private ArrayList<String> commands = new ArrayList<String>();
-	private int i = 0;
+	private int i = -1;
+	private int angle;
 
 	public Graphics(Group root)
 	{
@@ -37,6 +38,14 @@ public class Graphics {
 
 	public void setColor(Color colour) {
 		this.color = colour;	
+	}
+	
+	public void setRotate(int angle) {
+		this.angle = angle;
+	}
+	
+	public void setFillColor(Color color){
+		this.fill = color;
 	}
 
 	public void setGradientColor(Color start, Color end)
@@ -51,6 +60,7 @@ public class Graphics {
 		Line line = new Line(oldx, oldy, x, y);
 		line.setStroke(color);
 		line.setFill(color);
+		line.setRotate(angle);
 		System.out.println(line);
 		nodes.add(line);
 		commands.add(s);
@@ -63,6 +73,7 @@ public class Graphics {
 		Rectangle rectangle = new Rectangle(x1, y1, x2, y2);
 		rectangle.setStroke(color);
 		rectangle.setFill(fill);
+		rectangle.setRotate(angle);
 		nodes.add(rectangle);
 		commands.add(s);
 		//	root.getChildren().add(rectangle);
@@ -74,6 +85,7 @@ public class Graphics {
 		Rectangle rectangle = new Rectangle(x1, y1, x2, y2);
 		rectangle.setStroke(color);
 		rectangle.setFill(fill);
+		rectangle.setRotate(angle);
 		nodes.add(rectangle);
 		commands.add(s);
 		//root.getChildren().add(rectangle);
@@ -84,10 +96,10 @@ public class Graphics {
 		String s = "Draw string X = " + x + " Y = " + y + " string = " + string;
 		Text text = new Text(x, y, s);
 		text.setStroke(color);
+		text.setRotate(angle);
 		nodes.add(text);
 		commands.add(s);
 		//root.getChildren().add(text);
-
 	}
 
 	public void drawArc(int x, int y, int width, int height, int startAngle,
@@ -96,10 +108,10 @@ public class Graphics {
 		Arc arc = new Arc(x+width/2, y+height/2, width/2, height/2, startAngle, arcAngle);
 		arc.setStroke(color);
 		arc.setFill(fill);
+		arc.setRotate(angle);
 		nodes.add(arc);
 		commands.add(s);
 		//root.getChildren().add(arc);
-
 	}
 
 	public void drawOval(int x, int y, int width, int height) {
@@ -107,6 +119,7 @@ public class Graphics {
 		Ellipse ellipse = new Ellipse(x+width/2, y+height/2, width/2, height/2);
 		ellipse.setStroke(color);
 		ellipse.setFill(fill);
+		ellipse.setRotate(angle);
 		nodes.add(ellipse);
 		commands.add(s);
 		//root.getChildren().add(ellipse);
@@ -118,6 +131,7 @@ public class Graphics {
 		ImageView image = new ImageView(new Image(path, width, height, false, false));
 		image.setLayoutX(x);
 		image.setLayoutY(y);
+		image.setRotate(angle);
 		nodes.add(image);
 		commands.add(s);
 		//root.getChildren().add(image);
@@ -129,6 +143,7 @@ public class Graphics {
 		polygon.getPoints().addAll(array);
 		polygon.setStroke(color);
 		polygon.setFill(fill);
+		polygon.setRotate(angle);
 		nodes.add(polygon);
 		commands.add(s);
 		//root.getChildren().add(polygon);
@@ -136,9 +151,10 @@ public class Graphics {
 	
 	public String drawWhole()
 	{
-		while(i < nodes.size()) {
-			root.getChildren().add(nodes.get(i));
+		while(i < nodes.size() - 1) {
 			i++;
+			root.getChildren().add(nodes.get(i));
+			
 		}
 		return"Drawing completed";
 	}
@@ -146,30 +162,28 @@ public class Graphics {
 	public String drawNextNode()
 	{
 		String s = "Drawing completed";
-		if(i < nodes.size()) {
-			s = commands.get(i);
-			root.getChildren().add(nodes.get(i));
+		if(i < nodes.size() - 1) {
 			i++;
+			s = commands.get(i);
+			root.getChildren().add(nodes.get(i));		
 		}
+		System.out.println(i);
 		return s;
 	}
 
 	public String drawPreviousNode()
 	{
 		String s = "Nothing drawn yet";
-		if(i > 1) {
-			i--;
-			root.getChildren().remove(nodes.get(i));
-			s = commands.get(i-1);
-		}
-		else if(i == 1) {
+		if(i > 0) {
 			root.getChildren().remove(nodes.get(i));
 			s = commands.get(i-1);
 			i--;
 		}
 		else if(i == 0) {
 			root.getChildren().remove(nodes.get(i));
+			i--;
 		}
+		System.out.println(i);
 		return s;
 	}
 

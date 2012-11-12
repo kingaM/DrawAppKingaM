@@ -57,13 +57,21 @@ void setColour(colour c)
 	free(colourName);
 }
 
-void setFillColour(colour c1, colour c2)
+void setFillColour(colour c)
+{
+	char* colourName = malloc(sizeof(char)*10);
+	getColour(c, colourName);
+	printf("SF %s\n", colourName);
+	free(colourName);
+}
+
+void setGradientColour(colour c1, colour c2)
 {
 	char* colour1 = malloc(sizeof(char)*10);
 	char* colour2 = malloc(sizeof(char)*10);
 	getColour(c1, colour1);
 	getColour(c2, colour2);
-	printf("SC %s %s\n", colour1, colour2);
+	printf("GC %s %s\n", colour1, colour2);
 	free(colour1);
 	free(colour2);
 }

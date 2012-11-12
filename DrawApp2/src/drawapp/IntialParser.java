@@ -26,21 +26,18 @@ public class IntialParser extends Parser
 	{
 			String[] lines = { 
 		"600 600",
-		"T 100 100 30",
-		"PD",
-		"LALALAL",
-		"GF 10",
-		"TL 30",
-		"GF 20",
-		"TR 40",
-		"GF 20" };
+		"G",
+		"DR 100 100 10 10",
+		"SR 35",
+		"GC blue green",
+		"CFC",
+		"DR 10 10 10 10"};
 
 		for(String s : lines)
 			ccode.add(s);
 
-	/*	try {
-			String line = null;
-			line = reader.readLine();
+/*	try {
+			String line = reader.readLine();
 
 			while (line != null) {
 				ccode.add(line);
@@ -79,7 +76,4 @@ public class IntialParser extends Parser
 		new ParseException("Unknown mode:" + s);
 		return null;
 	}
-
-
-
 }

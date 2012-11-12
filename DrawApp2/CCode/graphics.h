@@ -9,7 +9,9 @@ void fillRect(int,int,int,int);
 void drawString(char*,int,int);
 
 void setColour(colour);
-void getColour(colour c, char *);
+void getColour(colour, char *);
 void drawPolygon(double[], int);
 void drawImage(int, int, int, int, char[]);
-void setFillColour(colour c1, colour c2);
+void setFillColour(colour);
+void setGradientColour(colour, colour);
+void setRotate(int);
