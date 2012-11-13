@@ -1,6 +1,8 @@
 package drawapp;
 
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -65,13 +67,30 @@ public class MainWindow
 		EventHandler<ActionEvent> all = new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				postMessage(graphics.drawWhole());	
+				postMessage(graphics.drawWhole());
+		/*		Platform.runLater(
+				graphics.slowMotion());*/
 			}
 		};
 		buttonW.setOnAction(all);
+		
+		Button buttonS = new Button("Save image");
+		buttonS.setPrefSize(100, 20);
+		EventHandler<ActionEvent> save = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				try {
+					graphics.saveImage();
+				} catch (IOException e) {
+					postMessage(e.getMessage());
+					e.printStackTrace();
+				}	
+			}
+		};
+		buttonS.setOnAction(save);
 
 		hbox.toFront();
-		hbox.getChildren().addAll(button, buttonN, buttonP, buttonW);
+		hbox.getChildren().addAll(button, buttonN, buttonP, buttonW, buttonS);
 		hbox.setLayoutY(150 - button.getPrefHeight() - 10);
 		gui.getChildren().add(hbox);
 
@@ -102,6 +121,5 @@ public class MainWindow
 
 	public void postMessage(String s) {
 		text.setText(s);
-
 	}
 }

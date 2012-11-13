@@ -2,8 +2,8 @@ package drawapp;
 
 public class Dimensions {
 	
-	private static int height;
-	private static int width;
+	private static int height = 600;
+	private static int width = 600;
 	
 	public static int getHeight() {
 		return height;

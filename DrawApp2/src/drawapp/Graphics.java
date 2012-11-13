@@ -1,8 +1,12 @@
 package drawapp;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -18,6 +22,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+
+import javax.imageio.ImageIO;
 
 public class Graphics {
 
@@ -61,7 +67,6 @@ public class Graphics {
 		line.setStroke(color);
 		line.setFill(color);
 		line.setRotate(angle);
-		System.out.println(line);
 		nodes.add(line);
 		commands.add(s);
 		//root.getChildren().add(line);
@@ -149,12 +154,35 @@ public class Graphics {
 		//root.getChildren().add(polygon);
 	}
 	
+	public void saveImage() throws IOException {
+		Calendar cal = Calendar.getInstance();
+		ImageIO.write(SwingFXUtils.fromFXImage(root.snapshot(null, null), null), "png", new File(cal.getTimeInMillis() + ".png"));
+	}
+	
+	public Thread slowMotion()
+	{
+		Thread thread = new Thread(){
+			public void run() {
+				while(i < nodes.size() - 1) {
+					i++;
+					root.getChildren().add(nodes.get(i));
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		return thread;
+	}
+	
 	public String drawWhole()
 	{
 		while(i < nodes.size() - 1) {
 			i++;
-			root.getChildren().add(nodes.get(i));
-			
+			root.getChildren().add(nodes.get(i));		
 		}
 		return"Drawing completed";
 	}
@@ -167,7 +195,6 @@ public class Graphics {
 			s = commands.get(i);
 			root.getChildren().add(nodes.get(i));		
 		}
-		System.out.println(i);
 		return s;
 	}
 
@@ -183,7 +210,6 @@ public class Graphics {
 			root.getChildren().remove(nodes.get(i));
 			i--;
 		}
-		System.out.println(i);
 		return s;
 	}
 

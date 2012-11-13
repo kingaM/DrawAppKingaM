@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 public class ParseTurtle extends Parser {
 
 	private ArrayList<String> ccode = new ArrayList<String>();
-	Turtle turtle;
+	private Turtle turtle;
 
 	public ParseTurtle(ArrayList<String> ccode, Turtle turtle) throws ParseException {
 		this.ccode = ccode;

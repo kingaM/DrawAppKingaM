@@ -32,22 +32,22 @@ public class Main extends Application
 		Reader reader = new InputStreamReader(System.in);
 		
 		MainWindow main = new MainWindow(graphics, image);
-		
+		main.buildGUI();
 		Turtle turtle = new Turtle(graphics, image);
 		IntialParser parser = new IntialParser(reader,image,main, turtle);
 		try {
 			parser.parse();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Exception");
 			main.postMessage(e.getMessage());
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		primaryStage.setResizable(false);
 		primaryStage.setScene(new Scene(root, Dimensions.getWidth(), Dimensions.getHeight()));
-		main.buildGUI();
 		
 		try {
-			Parser mode = parser.graphicsOrTurtle();
+			parser.graphicsOrTurtle();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			main.postMessage(e.getMessage());
