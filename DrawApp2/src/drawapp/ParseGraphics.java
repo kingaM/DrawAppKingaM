@@ -38,7 +38,7 @@ public class ParseGraphics extends Parser {
 			return;
 		}
 		if (command.equals("SC")) {
-			setColour(line.substring(3, line.length()));
+			setColor(line.substring(3, line.length()));
 			return;
 		}
 		if (command.equals("DS")) {
@@ -66,15 +66,15 @@ public class ParseGraphics extends Parser {
 			return;
 		}
 		if (command.equals("GC")) {
-			setGradientColour(line.substring(3, line.length()));
+			setGradientColor(line.substring(3, line.length()));
 			return;
 		}
 		if (command.equals("SF")) {
-			setFillColour(line.split(" ")[1]);
+			setFillColor(line.split(" ")[1]);
 			return;
 		}
 		if (command.equals("CFC")) {
-			clearFillColour();
+			clearFillColor();
 			return;
 		}
 		if (command.equals("CSC")) {
@@ -84,8 +84,8 @@ public class ParseGraphics extends Parser {
 		throw new ParseException("Unknown drawing command: " + line);
 	}
 
-	private void setFillColour(String color) throws ParseException {
-		Color c = getColour(color);
+	private void setFillColor(String color) throws ParseException {
+		Color c = getColor(color);
 		image.setFillColor(c);
 
 	}
@@ -182,19 +182,18 @@ public class ParseGraphics extends Parser {
 		image.drawString(s, x, y);
 	}
 
-	private void setColour(String colourName) throws ParseException {
-		image.setColor(getColour(colourName));
+	private void setColor(String colorName) throws ParseException {
+		image.setColor(getColor(colorName));
 	}
 
-	private void setGradientColour(String args) throws ParseException {
+	private void setGradientColor(String args) throws ParseException {
 		StringTokenizer tokenizer = new StringTokenizer(args);
 		String s = tokenizer.nextToken();
-		Color start = getColour(s);
-		Color end = getColour(tokenizer.nextToken());
+		Color start = getColor(s);
+		Color end = getColor(tokenizer.nextToken());
 		image.setGradientColor(start, end);
 	}
-
-	private void clearFillColour() {
+	private void clearFillColor() {
 		image.setFillColor(Color.TRANSPARENT);
 	}
 

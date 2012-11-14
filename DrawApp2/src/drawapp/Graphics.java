@@ -35,65 +35,67 @@ public class Graphics {
 	private int i = -1;
 	private int angle;
 
-	public Graphics(Group root)
-	{
+	public Graphics(Group root) {
 		this.root = new Group();
 		root.getChildren().add(this.root);
 		this.root.toBack();
 	}
 
-	public void setColor(Color colour) {
-		this.color = colour;	
+	public void setColor(Color color) {
+		this.color = color;
 	}
-	
+
 	public void setRotate(int angle) {
 		this.angle = angle;
 	}
-	
-	public void setFillColor(Color color){
+
+	public void setFillColor(Color color) {
 		this.fill = color;
 	}
 
-	public void setGradientColor(Color start, Color end)
-	{
-		Stop[] stops = new Stop[] { new Stop(0, start), new Stop(1, end)};
-		LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+	public void setGradientColor(Color start, Color end) {
+		Stop[] stops = new Stop[] { new Stop(0, start), new Stop(1, end) };
+		LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true,
+				CycleMethod.NO_CYCLE, stops);
 		this.fill = lg1;
 	}
 
 	public void drawLine(double oldx, double oldy, double x, double y) {
-		String s = "Draw line startX = " + oldx + " startY = " + oldy + " endX = " + x + " endY = " + y;
+		String s = "Draw line startX = " + oldx + " startY = " + oldy
+				+ " endX = " + x + " endY = " + y;
 		Line line = new Line(oldx, oldy, x, y);
 		line.setStroke(color);
 		line.setFill(color);
 		line.setRotate(angle);
 		nodes.add(line);
 		commands.add(s);
-		//root.getChildren().add(line);
+		// root.getChildren().add(line);
 
 	}
 
 	public void drawRect(int x1, int y1, int x2, int y2) {
-		String s = "Draw rectangle X = " + x1 + " Y = " + y1 + " width = " + x2 + " height = " + y2;
+		String s = "Draw rectangle X = " + x1 + " Y = " + y1 + " width = " + x2
+				+ " height = " + y2;
 		Rectangle rectangle = new Rectangle(x1, y1, x2, y2);
 		rectangle.setStroke(color);
 		rectangle.setFill(fill);
 		rectangle.setRotate(angle);
 		nodes.add(rectangle);
 		commands.add(s);
-		//	root.getChildren().add(rectangle);
+		// root.getChildren().add(rectangle);
 
 	}
 
 	public void fillRect(int x1, int y1, int x2, int y2) {
-		String s = "Draw rectangle X = " + x1 + " Y = " + y1 + " width = " + x2 + " height = " + y2;
+		String s = "Draw rectangle X = " + x1 + " Y = " + y1 + " width = " + x2
+				+ " height = " + y2;
 		Rectangle rectangle = new Rectangle(x1, y1, x2, y2);
 		rectangle.setStroke(color);
 		rectangle.setFill(fill);
 		rectangle.setRotate(angle);
 		nodes.add(rectangle);
 		commands.add(s);
-		//root.getChildren().add(rectangle);
+		// root.getChildren().add(rectangle);
 
 	}
 
@@ -104,42 +106,48 @@ public class Graphics {
 		text.setRotate(angle);
 		nodes.add(text);
 		commands.add(s);
-		//root.getChildren().add(text);
+		// root.getChildren().add(text);
 	}
 
 	public void drawArc(int x, int y, int width, int height, int startAngle,
 			int arcAngle) {
-		String s = "Draw arc X = " + x + " Y = " + y + " width = " + width + " height = " + height;
-		Arc arc = new Arc(x+width/2, y+height/2, width/2, height/2, startAngle, arcAngle);
+		String s = "Draw arc X = " + x + " Y = " + y + " width = " + width
+				+ " height = " + height;
+		Arc arc = new Arc(x + width / 2, y + height / 2, width / 2, height / 2,
+				startAngle, arcAngle);
 		arc.setStroke(color);
 		arc.setFill(fill);
 		arc.setRotate(angle);
 		nodes.add(arc);
 		commands.add(s);
-		//root.getChildren().add(arc);
+		// root.getChildren().add(arc);
 	}
 
 	public void drawOval(int x, int y, int width, int height) {
-		String s = "Draw oval X = " + x + " Y = " + y + " width = " + width + " height = " + height;
-		Ellipse ellipse = new Ellipse(x+width/2, y+height/2, width/2, height/2);
+		String s = "Draw oval X = " + x + " Y = " + y + " width = " + width
+				+ " height = " + height;
+		Ellipse ellipse = new Ellipse(x + width / 2, y + height / 2, width / 2,
+				height / 2);
 		ellipse.setStroke(color);
 		ellipse.setFill(fill);
 		ellipse.setRotate(angle);
 		nodes.add(ellipse);
 		commands.add(s);
-		//root.getChildren().add(ellipse);
+		// root.getChildren().add(ellipse);
 
 	}
 
 	public void drawImage(int x, int y, int width, int height, String path) {
-		String s = "Draw image X = " + x + " Y = " + y + " width = " + width + " height = " + height + " path = " + path;
-		ImageView image = new ImageView(new Image(path, width, height, false, false));
+		String s = "Draw image X = " + x + " Y = " + y + " width = " + width
+				+ " height = " + height + " path = " + path;
+		ImageView image = new ImageView(new Image(path, width, height, false,
+				false));
 		image.setLayoutX(x);
 		image.setLayoutY(y);
 		image.setRotate(angle);
 		nodes.add(image);
 		commands.add(s);
-		//root.getChildren().add(image);
+		// root.getChildren().add(image);
 	}
 
 	public void drawPolygon(Double[] array) {
@@ -151,19 +159,20 @@ public class Graphics {
 		polygon.setRotate(angle);
 		nodes.add(polygon);
 		commands.add(s);
-		//root.getChildren().add(polygon);
+		// root.getChildren().add(polygon);
 	}
-	
+
 	public void saveImage() throws IOException {
 		Calendar cal = Calendar.getInstance();
-		ImageIO.write(SwingFXUtils.fromFXImage(root.snapshot(null, null), null), "png", new File(cal.getTimeInMillis() + ".png"));
+		ImageIO.write(
+				SwingFXUtils.fromFXImage(root.snapshot(null, null), null),
+				"png", new File(cal.getTimeInMillis() + ".png"));
 	}
-	
-	public Thread slowMotion()
-	{
-		Thread thread = new Thread(){
+
+	public Thread slowMotion() {
+		Thread thread = new Thread() {
 			public void run() {
-				while(i < nodes.size() - 1) {
+				while (i < nodes.size() - 1) {
 					i++;
 					root.getChildren().add(nodes.get(i));
 					try {
@@ -177,36 +186,32 @@ public class Graphics {
 		};
 		return thread;
 	}
-	
-	public String drawWhole()
-	{
-		while(i < nodes.size() - 1) {
+
+	public String drawWhole() {
+		while (i < nodes.size() - 1) {
 			i++;
-			root.getChildren().add(nodes.get(i));		
+			root.getChildren().add(nodes.get(i));
 		}
-		return"Drawing completed";
+		return "Drawing completed";
 	}
 
-	public String drawNextNode()
-	{
+	public String drawNextNode() {
 		String s = "Drawing completed";
-		if(i < nodes.size() - 1) {
+		if (i < nodes.size() - 1) {
 			i++;
 			s = commands.get(i);
-			root.getChildren().add(nodes.get(i));		
+			root.getChildren().add(nodes.get(i));
 		}
 		return s;
 	}
 
-	public String drawPreviousNode()
-	{
+	public String drawPreviousNode() {
 		String s = "Nothing drawn yet";
-		if(i > 0) {
+		if (i > 0) {
 			root.getChildren().remove(nodes.get(i));
-			s = commands.get(i-1);
+			s = commands.get(i - 1);
 			i--;
-		}
-		else if(i == 0) {
+		} else if (i == 0) {
 			root.getChildren().remove(nodes.get(i));
 			i--;
 		}

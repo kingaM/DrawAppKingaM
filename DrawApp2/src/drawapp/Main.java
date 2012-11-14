@@ -13,39 +13,38 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class Main extends Application
-{
+public class Main extends Application {
 	Group root;
 	int height, width;
-	
-	public static void main(String[] args)
-	{
+
+	public static void main(String[] args) {
 		launch(args);
 	}
-	
+
 	private void init(Stage primaryStage) {
 		root = new Group();
 		Group graphics = new Group();
 		root.getChildren().add(graphics);
-		
+
 		Graphics image = new Graphics(graphics);
 		Reader reader = new InputStreamReader(System.in);
-		
+
 		MainWindow main = new MainWindow(graphics, image);
 		main.buildGUI();
 		Turtle turtle = new Turtle(graphics, image);
-		IntialParser parser = new IntialParser(reader,image,main, turtle);
+		IntialParser parser = new IntialParser(reader, image, main, turtle);
 		try {
 			parser.parse();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Exception");
 			main.postMessage(e.getMessage());
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
 		primaryStage.setResizable(false);
-		primaryStage.setScene(new Scene(root, Dimensions.getWidth(), Dimensions.getHeight()));
-		
+		primaryStage.setScene(new Scene(root, Dimensions.getWidth(), Dimensions
+				.getHeight()));
+
 		try {
 			parser.graphicsOrTurtle();
 		} catch (ParseException e) {
@@ -53,11 +52,10 @@ public class Main extends Application
 			main.postMessage(e.getMessage());
 			e.printStackTrace();
 		}
-		//mode.drawNext();
+		// mode.drawNext();
 		primaryStage.setTitle("Draw App");
 		primaryStage.show();
 	}
-	
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {

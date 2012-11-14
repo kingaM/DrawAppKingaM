@@ -1,6 +1,5 @@
 package drawapp;
 
-
 import java.io.IOException;
 
 import javafx.application.Platform;
@@ -14,16 +13,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class MainWindow 
-{
+public class MainWindow {
 	private Group root;
 	private Group gui;
 	private TextArea text;
 	private Graphics graphics;
 
-
-	public MainWindow(Group root, Graphics graphics)
-	{
+	public MainWindow(Group root, Graphics graphics) {
 		this.root = root;
 		this.graphics = graphics;
 	}
@@ -37,7 +33,7 @@ public class MainWindow
 		EventHandler<ActionEvent> close = new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				Platform.exit();		
+				Platform.exit();
 			}
 		};
 		button.setOnAction(close);
@@ -47,33 +43,34 @@ public class MainWindow
 		EventHandler<ActionEvent> next = new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				postMessage(graphics.drawNextNode());	
+				postMessage(graphics.drawNextNode());
 			}
 		};
 		buttonN.setOnAction(next);
-		
+
 		Button buttonP = new Button("Prev Step");
 		buttonP.setPrefSize(100, 20);
 		EventHandler<ActionEvent> previous = new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				postMessage(graphics.drawPreviousNode());	
+				postMessage(graphics.drawPreviousNode());
 			}
 		};
 		buttonP.setOnAction(previous);
-		
+
 		Button buttonW = new Button("Draw All");
 		buttonW.setPrefSize(100, 20);
 		EventHandler<ActionEvent> all = new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				postMessage(graphics.drawWhole());
-		/*		Platform.runLater(
-				graphics.slowMotion());*/
+				/*
+				 * Platform.runLater( graphics.slowMotion());
+				 */
 			}
 		};
 		buttonW.setOnAction(all);
-		
+
 		Button buttonS = new Button("Save image");
 		buttonS.setPrefSize(100, 20);
 		EventHandler<ActionEvent> save = new EventHandler<ActionEvent>() {
@@ -84,7 +81,7 @@ public class MainWindow
 				} catch (IOException e) {
 					postMessage(e.getMessage());
 					e.printStackTrace();
-				}	
+				}
 			}
 		};
 		buttonS.setOnAction(save);
@@ -96,8 +93,7 @@ public class MainWindow
 
 	}
 
-	public void buildGUI()
-	{
+	public void buildGUI() {
 		gui = new Group();
 
 		gui.setTranslateY(Dimensions.getHeight() - 150);

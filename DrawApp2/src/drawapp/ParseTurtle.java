@@ -8,7 +8,8 @@ public class ParseTurtle extends Parser {
 	private ArrayList<String> ccode = new ArrayList<String>();
 	private Turtle turtle;
 
-	public ParseTurtle(ArrayList<String> ccode, Turtle turtle) throws ParseException {
+	public ParseTurtle(ArrayList<String> ccode, Turtle turtle)
+			throws ParseException {
 		this.ccode = ccode;
 		this.turtle = turtle;
 		draw();
@@ -16,7 +17,7 @@ public class ParseTurtle extends Parser {
 
 	public void draw() throws ParseException {
 		for (String s : ccode) {
-				parseLine(s);
+			parseLine(s);
 		}
 	}
 
@@ -75,7 +76,7 @@ public class ParseTurtle extends Parser {
 	}
 
 	private void setPenColor(String line) throws ParseException {
-		turtle.setPenColor(getColour(line));
+		turtle.setPenColor(getColor(line));
 	}
 
 	private void penUp() {

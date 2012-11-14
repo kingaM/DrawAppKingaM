@@ -44,7 +44,7 @@ void drawPolygon(double d[], int length)
 	printf("\n");
 }
 
-void drawImage(int x, int y, int width, int height, char[] path)
+void drawImage(int x, int y, int width, int height, char path[])
 {
 	printf("DI %i %i %i %i %s\n", x, y, width, height, path);
 }
@@ -65,6 +65,16 @@ void setFillColour(colour c)
 	free(colourName);
 }
 
+void clearFillColour()
+{
+	printf("CFC\n");
+}
+
+void clearStrokeColour()
+{
+	printf("CSC\n");
+}
+
 void setGradientColour(colour c1, colour c2)
 {
 	char* colour1 = malloc(sizeof(char)*10);
@@ -74,6 +84,11 @@ void setGradientColour(colour c1, colour c2)
 	printf("GC %s %s\n", colour1, colour2);
 	free(colour1);
 	free(colour2);
+}
+
+void setRotate(int angle)
+{
+	printf("SR %i\n", angle);
 }
 
 void getColour(colour c, char* colourName)

@@ -15,3 +15,5 @@ void drawImage(int, int, int, int, char[]);
 void setFillColour(colour);
 void setGradientColour(colour, colour);
 void setRotate(int);
+void clearFillColour();
+void clearStrokeColour();

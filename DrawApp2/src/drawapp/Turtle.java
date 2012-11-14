@@ -4,15 +4,15 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
 public class Turtle {
-	private double x, y;     
-	private double angle;   
+	private double x, y;
+	private double angle;
 	private Graphics graphics;
 	private Color color = Color.BLACK;
 
 	public Turtle(Group root, Graphics image) {
 		graphics = image;
 	}
-	
+
 	public void setInitialPosition(double x0, double y0, double a0) {
 		x = x0;
 		y = y0;
@@ -22,7 +22,7 @@ public class Turtle {
 	public void turnLeft(double delta) {
 		angle += delta;
 	}
-	
+
 	public void turnRight(double delta) {
 		angle -= delta;
 	}
@@ -40,13 +40,11 @@ public class Turtle {
 		graphics.setColor(color);
 	}
 
-	public void penUp()
-	{
+	public void penUp() {
 		graphics.setColor(Color.TRANSPARENT);
 	}
 
-	public void penDown()
-	{
+	public void penDown() {
 		graphics.setColor(color);
 	}
 }
