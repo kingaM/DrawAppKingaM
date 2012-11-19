@@ -3,9 +3,18 @@ package drawapp;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 
-public class Parser {
+public abstract class Parser {
+
+	private ArrayList<Node> nodes = new ArrayList<Node>();
+	private ArrayList<String> commands;
+	private int i = 0;
+
+	public Parser(ArrayList<String> commands) {
+		this.commands = commands;
+	}
 
 	protected int getInteger(StringTokenizer tokenizer) throws ParseException {
 		if (tokenizer.hasMoreTokens())
@@ -69,10 +78,45 @@ public class Parser {
 		while (tokenizer.hasMoreTokens()) {
 			double d = Double.parseDouble(tokenizer.nextToken());
 			arrayList.add(d);
-			System.out.println(d);
 		}
 		Double[] array = new Double[arrayList.size()];
 		arrayList.toArray(array);
 		return array;
+	}
+
+	// public abstract Graphics draw() throws ParseException;
+
+	protected abstract void parseLine(String line) throws ParseException;
+
+	public String drawWhole() throws ParseException {
+		while (i < nodes.size() - 1) {
+			i++;
+			parseLine(commands.get(i));
+			// getChildren().add(nodes.get(i));
+		}
+		return "Drawing completed";
+	}
+
+	public String drawNextNode() throws ParseException {
+		String s = "Drawing completed";
+		if (i < nodes.size() - 1) {
+			i++;
+			parseLine(commands.get(i));
+			// getChildren().add(nodes.get(i));
+		}
+		return s;
+	}
+
+	public String drawPreviousNode() {
+		String s = "Nothing drawn yet";
+		if (i > 0) {
+			// getChildren().remove(nodes.get(i));
+			commands.get(i - 1);
+			i--;
+		} else if (i == 0) {
+			// getChildren().remove(nodes.get(i));
+			i--;
+		}
+		return s;
 	}
 }

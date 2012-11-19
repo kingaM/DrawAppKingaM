@@ -12,18 +12,19 @@ public class ParseGraphics extends Parser {
 
 	public ParseGraphics(ArrayList<String> ccode, Graphics image)
 			throws ParseException {
+		super(ccode);
 		this.ccode = ccode;
-		this.image = image;
-		draw();
+		this.image = new Graphics();
 	}
+//
+//	public Graphics draw() throws ParseException {
+//		for (String s : ccode) {
+//			parseLine(s);
+//		}
+//		return image;
+//	}
 
-	public void draw() throws ParseException {
-		for (String s : ccode) {
-			parseLine(s);
-		}
-	}
-
-	private void parseLine(String line) throws ParseException {
+	protected void parseLine(String line) throws ParseException {
 		String command = line.split(" ")[0];
 		if (command.equals("DL")) {
 			drawLine(line.substring(2, line.length()));
@@ -87,7 +88,6 @@ public class ParseGraphics extends Parser {
 	private void setFillColor(String color) throws ParseException {
 		Color c = getColor(color);
 		image.setFillColor(c);
-
 	}
 
 	private void setRotate(int angle) {

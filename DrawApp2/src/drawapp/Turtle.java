@@ -9,8 +9,8 @@ public class Turtle {
 	private Graphics graphics;
 	private Color color = Color.BLACK;
 
-	public Turtle(Group root, Graphics image) {
-		graphics = image;
+	public Turtle(Graphics graphics) {
+		this.graphics = graphics;
 	}
 
 	public void setInitialPosition(double x0, double y0, double a0) {

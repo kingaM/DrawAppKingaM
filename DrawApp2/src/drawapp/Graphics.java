@@ -11,6 +11,9 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
@@ -25,20 +28,16 @@ import javafx.scene.text.Text;
 
 import javax.imageio.ImageIO;
 
-public class Graphics {
+public class Graphics extends Pane {
 
 	private Color color = Color.BLACK;
 	private Paint fill = Color.TRANSPARENT;
-	private Group root;
 	private ArrayList<Node> nodes = new ArrayList<Node>();
 	private ArrayList<String> commands = new ArrayList<String>();
 	private int i = -1;
 	private int angle;
 
-	public Graphics(Group root) {
-		this.root = new Group();
-		root.getChildren().add(this.root);
-		this.root.toBack();
+	public Graphics() {
 	}
 
 	public void setColor(Color color) {
@@ -165,32 +164,14 @@ public class Graphics {
 	public void saveImage() throws IOException {
 		Calendar cal = Calendar.getInstance();
 		ImageIO.write(
-				SwingFXUtils.fromFXImage(root.snapshot(null, null), null),
+				SwingFXUtils.fromFXImage(snapshot(null, null), null),
 				"png", new File(cal.getTimeInMillis() + ".png"));
-	}
-
-	public Thread slowMotion() {
-		Thread thread = new Thread() {
-			public void run() {
-				while (i < nodes.size() - 1) {
-					i++;
-					root.getChildren().add(nodes.get(i));
-					try {
-						Thread.sleep(10000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		};
-		return thread;
 	}
 
 	public String drawWhole() {
 		while (i < nodes.size() - 1) {
 			i++;
-			root.getChildren().add(nodes.get(i));
+			getChildren().add(nodes.get(i));
 		}
 		return "Drawing completed";
 	}
@@ -200,7 +181,7 @@ public class Graphics {
 		if (i < nodes.size() - 1) {
 			i++;
 			s = commands.get(i);
-			root.getChildren().add(nodes.get(i));
+			getChildren().add(nodes.get(i));
 		}
 		return s;
 	}
@@ -208,14 +189,18 @@ public class Graphics {
 	public String drawPreviousNode() {
 		String s = "Nothing drawn yet";
 		if (i > 0) {
-			root.getChildren().remove(nodes.get(i));
+			getChildren().remove(nodes.get(i));
 			s = commands.get(i - 1);
 			i--;
 		} else if (i == 0) {
-			root.getChildren().remove(nodes.get(i));
+			getChildren().remove(nodes.get(i));
 			i--;
 		}
 		return s;
+	}
+	
+	public void remove(Node node) {
+		getChildren().remove(node);
 	}
 
 }

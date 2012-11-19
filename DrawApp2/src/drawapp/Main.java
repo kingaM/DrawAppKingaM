@@ -1,5 +1,7 @@
 package drawapp;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
@@ -22,37 +24,24 @@ public class Main extends Application {
 	}
 
 	private void init(Stage primaryStage) {
-		root = new Group();
-		Group graphics = new Group();
-		root.getChildren().add(graphics);
-
-		Graphics image = new Graphics(graphics);
-		Reader reader = new InputStreamReader(System.in);
-
-		MainWindow main = new MainWindow(graphics, image);
-		main.buildGUI();
-		Turtle turtle = new Turtle(graphics, image);
-		IntialParser parser = new IntialParser(reader, image, main, turtle);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		IntialParser parser = new IntialParser(reader);
+		MainWindow root = new MainWindow();
+		root.buildGUI();
 		try {
-			parser.parse();
+			root.addCanvas(parser.draw());
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Exception");
-			main.postMessage(e.getMessage());
-			// e.printStackTrace();
+			System.out.println(e.getMessage());
+			//root.postMessage(e.getMessage());
 		}
-		primaryStage.setResizable(false);
-		primaryStage.setScene(new Scene(root, Dimensions.getWidth(), Dimensions
-				.getHeight()));
-
 		try {
-			parser.graphicsOrTurtle();
-		} catch (ParseException e) {
+			reader.close();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			main.postMessage(e.getMessage());
 			e.printStackTrace();
 		}
-		// mode.drawNext();
+		primaryStage.setResizable(true);
+		primaryStage.setScene(new Scene(root, 600, 600));
 		primaryStage.setTitle("Draw App");
 		primaryStage.show();
 	}

@@ -5,28 +5,27 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class MainWindow {
-	private Group root;
-	private Group gui;
+public class MainWindow extends BorderPane {
 	private TextArea text;
 	private Graphics graphics;
 
-	public MainWindow(Group root, Graphics graphics) {
-		this.root = root;
-		this.graphics = graphics;
-	}
-
-	public void addHBox() {
+	public HBox addHBox() {
 		HBox hbox = new HBox();
 		hbox.setSpacing(10);
+		hbox.setPrefWidth(Dimensions.getWidth());
+		hbox.setAlignment(Pos.CENTER);
 
 		Button button = new Button("Close Window");
 		button.setPrefSize(100, 20);
@@ -64,9 +63,6 @@ public class MainWindow {
 			@Override
 			public void handle(ActionEvent event) {
 				postMessage(graphics.drawWhole());
-				/*
-				 * Platform.runLater( graphics.slowMotion());
-				 */
 			}
 		};
 		buttonW.setOnAction(all);
@@ -88,31 +84,37 @@ public class MainWindow {
 
 		hbox.toFront();
 		hbox.getChildren().addAll(button, buttonN, buttonP, buttonW, buttonS);
-		hbox.setLayoutY(150 - button.getPrefHeight() - 10);
-		gui.getChildren().add(hbox);
-
+		return hbox;
 	}
 
 	public void buildGUI() {
-		gui = new Group();
-
-		gui.setTranslateY(Dimensions.getHeight() - 150);
-		gui.toFront();
-		root.getChildren().add(gui);
 
 		Rectangle rect = new Rectangle(Dimensions.getWidth(), 150);
 		rect.setFill(Color.LIGHTBLUE);
-		gui.getChildren().add(rect);
+		
+		VBox vbox = new VBox();
 
 		text = new TextArea();
 		text.setWrapText(true);
 		text.setPrefHeight(110);
 		text.setPrefWidth(Dimensions.getWidth());
 		text.setEditable(false);
+		
+		HBox hbox = addHBox();
+		
+		vbox.getChildren().addAll(text, hbox);
+		vbox.setStyle("-fx-background-color: lightblue;");
+		this.setBottom(vbox);	
+	}
+	
+	public void addCanvas(Graphics graphics)
+	{
+		this.graphics = graphics;
+		ScrollPane scroll = new ScrollPane();
 
-		addHBox();
-		gui.getChildren().add(text);
-		gui.toFront();
+		scroll.setMinSize(600, 300);
+		scroll.setContent(graphics);
+		this.setCenter(scroll);
 	}
 
 	public void postMessage(String s) {
