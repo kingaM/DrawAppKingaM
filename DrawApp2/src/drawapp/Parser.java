@@ -9,7 +9,6 @@ import javafx.scene.paint.Color;
 
 public abstract class Parser {
 
-	private ArrayList<Node> nodes = new ArrayList<Node>();
 	private ArrayList<String> commands;
 	protected Graphics graphics = new Graphics();
 	private int i = -1;
@@ -23,6 +22,11 @@ public abstract class Parser {
 			return Integer.parseInt(tokenizer.nextToken());
 		else
 			throw new ParseException("Missing Integer value");
+	}
+	
+	protected void setDimensions(int width, int height)
+	{
+		graphics.setDimensions(width, height);
 	}
 
 	protected Color getColor(String colorName) throws ParseException {
@@ -116,19 +120,6 @@ public abstract class Parser {
 			parseLine(s);
 			System.out.println("Drawing next node done");
 			// getChildren().add(nodes.get(i));
-		}
-		return s;
-	}
-
-	public String drawPreviousNode() {
-		String s = "Nothing drawn yet";
-		if (i > 0) {
-			// getChildren().remove(nodes.get(i));
-			commands.get(i - 1);
-			i--;
-		} else if (i == 0) {
-			// getChildren().remove(nodes.get(i));
-			i--;
 		}
 		return s;
 	}

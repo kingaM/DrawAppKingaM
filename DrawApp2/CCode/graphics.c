@@ -3,14 +3,14 @@
 #include <string.h>
 #include "graphics.h"
 
-void drawLine(int x1, int x2, int x3, int x4)
+void drawLine(int x1, int y1, int x2, int y2)
 {
-	printf("DL %i %i %i %i\n", x1, x2, x3, x4);
+	printf("DL %i %i %i %i\n", x1, y1, x2, y2);
 }
 
-void drawRect(int x1, int x2, int x3, int x4)
+void drawRect(int x1, int x2, int width, int height)
 {
-	printf("DR %i %i %i %i\n", x1, x2, x3, x4);
+	printf("DR %i %i %i %i\n", x1, x2, width, height);
 }
 
 void drawOval(int x, int y, int width, int height)
@@ -21,11 +21,6 @@ void drawOval(int x, int y, int width, int height)
 void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle)
 {
 	printf("DA %i %i %i %i %i %i\n",x,y,width,height, startAngle, arcAngle);
-}
-
-void fillRect(int x1, int x2, int x3, int x4)
-{
-	printf("FR %i %i %i %i\n", x1, x2, x3, x4);
 }
 
 void drawString(char* s, int x, int y)

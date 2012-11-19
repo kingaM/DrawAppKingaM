@@ -78,6 +78,10 @@ public class ParseGraphics extends Parser {
 			clearClour();
 			return;
 		}
+		if (command.equals("D")) {
+			setDimensions(Integer.parseInt(line.split(" ")[1]), Integer.parseInt(line.split(" ")[2]));
+			return;
+		}
 		throw new ParseException("Unknown drawing command: " + line);
 	}
 

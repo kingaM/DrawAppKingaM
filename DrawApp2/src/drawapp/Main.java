@@ -27,6 +27,7 @@ public class Main extends Application {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		InitParser parser = new InitParser(reader);
 		MainWindow root = new MainWindow();
+		root.setMinSize(605, 505);
 		root.buildGUI();
 		try {
 			root.addCanvas(parser.draw());
@@ -41,7 +42,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 		primaryStage.setResizable(true);
-		primaryStage.setScene(new Scene(root, 600, 600));
+		primaryStage.setScene(new Scene(root));
 		primaryStage.setTitle("Draw App");
 		primaryStage.show();
 	}

@@ -7,24 +7,18 @@ public class ParseTurtle extends Parser {
 
 	private Turtle turtle;
 
+
 	public ParseTurtle(ArrayList<String> ccode, Turtle turtle)
 			throws ParseException {
 		super(ccode);
+		this.turtle = turtle;
 	}
 	
 	public Graphics getGraphics() {
-		return graphics;
+		return turtle.getGraphics();
 	}
 
-//	public Graphics draw() throws ParseException {
-//		for (String s : ccode) {
-//			parseLine(s);
-//		}
-//		return graphics;
-//	}
-
 	protected void parseLine(String line) throws ParseException {
-		System.out.println(line);
 		if (line.length() < 2)
 			return;
 		String command = line.split(" ")[0];

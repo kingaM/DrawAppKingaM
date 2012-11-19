@@ -41,7 +41,7 @@ void getColour(colour c, char* colourName)
 	switch(c)
 	{
 	case black : strcpy(colourName, "black"); break;
-	case blue :strcpy(colourName, "blue"); break;
+	case blue : strcpy(colourName, "blue"); break;
 	case cyan : strcpy(colourName, "cyan"); break;
 	case darkgray : strcpy(colourName, "darkgray"); break;
 	case gray : strcpy(colourName, "gray"); break;

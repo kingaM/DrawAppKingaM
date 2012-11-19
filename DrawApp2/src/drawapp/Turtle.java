@@ -8,12 +8,18 @@ public class Turtle {
 	private double angle;
 	private Graphics graphics;
 	private Color color = Color.BLACK;
+	private boolean penDown = true;
 
 	public Turtle(double x0, double y0, double a0) {
 		this.graphics = new Graphics();
 		x = x0;
 		y = y0;
 		angle = a0;
+	}
+	
+	public Graphics getGraphics()
+	{
+		return graphics;
 	}
 
 	public void turnLeft(double delta) {
@@ -34,7 +40,6 @@ public class Turtle {
 
 	public void setPenColor(Color color) {
 		this.color = color;
-		graphics.setColor(color);
 	}
 
 	public void penUp() {

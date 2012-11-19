@@ -3,7 +3,7 @@
 
 void setDimensions(int height, int width)
 {
-	printf("%i %i\n", height, width);
+	printf("D %i %i\n", height, width);
 }
 
 void setTurtleMode(int x, int y, int a)
