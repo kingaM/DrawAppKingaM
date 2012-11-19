@@ -5,16 +5,15 @@ import java.util.StringTokenizer;
 
 public class ParseTurtle extends Parser {
 
-	private ArrayList<String> ccode = new ArrayList<String>();
 	private Turtle turtle;
-	private Graphics graphics;
 
 	public ParseTurtle(ArrayList<String> ccode, Turtle turtle)
 			throws ParseException {
 		super(ccode);
-		this.ccode = ccode;
-		graphics = new Graphics();
-		this.turtle = new Turtle(graphics);
+	}
+	
+	public Graphics getGraphics() {
+		return graphics;
 	}
 
 //	public Graphics draw() throws ParseException {

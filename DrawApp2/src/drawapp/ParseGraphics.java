@@ -7,15 +7,11 @@ import javafx.scene.paint.Color;
 
 public class ParseGraphics extends Parser {
 
-	private ArrayList<String> ccode = new ArrayList<String>();
-	private Graphics image;
-
-	public ParseGraphics(ArrayList<String> ccode, Graphics image)
+	public ParseGraphics(ArrayList<String> ccode)
 			throws ParseException {
 		super(ccode);
-		this.ccode = ccode;
-		this.image = new Graphics();
 	}
+
 //
 //	public Graphics draw() throws ParseException {
 //		for (String s : ccode) {
@@ -87,11 +83,11 @@ public class ParseGraphics extends Parser {
 
 	private void setFillColor(String color) throws ParseException {
 		Color c = getColor(color);
-		image.setFillColor(c);
+		graphics.setFillColor(c);
 	}
 
 	private void setRotate(int angle) {
-		image.setRotate(angle);
+		graphics.setRotate(angle);
 	}
 
 	private void drawLine(String args) throws ParseException {
@@ -105,7 +101,7 @@ public class ParseGraphics extends Parser {
 		y1 = getInteger(tokenizer);
 		x2 = getInteger(tokenizer);
 		y2 = getInteger(tokenizer);
-		image.drawLine(x1, y1, x2, y2);
+		graphics.drawLine(x1, y1, x2, y2);
 	}
 
 	private void drawRect(String args) throws ParseException {
@@ -119,7 +115,7 @@ public class ParseGraphics extends Parser {
 		y1 = getInteger(tokenizer);
 		x2 = getInteger(tokenizer);
 		y2 = getInteger(tokenizer);
-		image.drawRect(x1, y1, x2, y2);
+		graphics.drawRect(x1, y1, x2, y2);
 	}
 
 	private void fillRect(String args) throws ParseException {
@@ -133,7 +129,7 @@ public class ParseGraphics extends Parser {
 		y1 = getInteger(tokenizer);
 		x2 = getInteger(tokenizer);
 		y2 = getInteger(tokenizer);
-		image.fillRect(x1, y1, x2, y2);
+		graphics.fillRect(x1, y1, x2, y2);
 	}
 
 	private void drawArc(String args) throws ParseException {
@@ -151,7 +147,7 @@ public class ParseGraphics extends Parser {
 		height = getInteger(tokenizer);
 		startAngle = getInteger(tokenizer);
 		arcAngle = getInteger(tokenizer);
-		image.drawArc(x, y, width, height, startAngle, arcAngle);
+		graphics.drawArc(x, y, width, height, startAngle, arcAngle);
 	}
 
 	private void drawOval(String args) throws ParseException {
@@ -165,7 +161,7 @@ public class ParseGraphics extends Parser {
 		y1 = getInteger(tokenizer);
 		width = getInteger(tokenizer);
 		height = getInteger(tokenizer);
-		image.drawOval(x1, y1, width, height);
+		graphics.drawOval(x1, y1, width, height);
 	}
 
 	private void drawString(String args) throws ParseException {
@@ -179,11 +175,11 @@ public class ParseGraphics extends Parser {
 		if (position == -1)
 			throw new ParseException("DrawString string is missing");
 		s = args.substring(position + 1, args.length());
-		image.drawString(s, x, y);
+		graphics.drawString(s, x, y);
 	}
 
 	private void setColor(String colorName) throws ParseException {
-		image.setColor(getColor(colorName));
+		graphics.setColor(getColor(colorName));
 	}
 
 	private void setGradientColor(String args) throws ParseException {
@@ -191,14 +187,14 @@ public class ParseGraphics extends Parser {
 		String s = tokenizer.nextToken();
 		Color start = getColor(s);
 		Color end = getColor(tokenizer.nextToken());
-		image.setGradientColor(start, end);
+		graphics.setGradientColor(start, end);
 	}
 	private void clearFillColor() {
-		image.setFillColor(Color.TRANSPARENT);
+		graphics.setFillColor(Color.TRANSPARENT);
 	}
 
 	private void clearClour() {
-		image.setColor(Color.BLACK);
+		graphics.setColor(Color.BLACK);
 	}
 
 	private void drawImage(String args) throws ParseException {
@@ -216,13 +212,13 @@ public class ParseGraphics extends Parser {
 		if (position == -1)
 			throw new ParseException("Path is missing: " + args);
 		path = args.substring(position + 1, args.length());
-		image.drawImage(x, y, width, height, path);
+		graphics.drawImage(x, y, width, height, path);
 	}
 
 	private void drawPolygon(String args) throws ParseException {
 		StringTokenizer tokenizer = new StringTokenizer(args);
 		Double[] array = getDoubleArray(tokenizer);
-		image.drawPolygon(array);
+		graphics.drawPolygon(array);
 	}
 
 }

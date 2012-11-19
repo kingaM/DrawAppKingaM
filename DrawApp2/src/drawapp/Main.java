@@ -25,7 +25,7 @@ public class Main extends Application {
 
 	private void init(Stage primaryStage) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		IntialParser parser = new IntialParser(reader);
+		InitParser parser = new InitParser(reader);
 		MainWindow root = new MainWindow();
 		root.buildGUI();
 		try {

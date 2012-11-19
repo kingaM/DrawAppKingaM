@@ -1,5 +1,6 @@
 package drawapp;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -10,7 +11,8 @@ public abstract class Parser {
 
 	private ArrayList<Node> nodes = new ArrayList<Node>();
 	private ArrayList<String> commands;
-	private int i = 0;
+	protected Graphics graphics = new Graphics();
+	private int i = -1;
 
 	public Parser(ArrayList<String> commands) {
 		this.commands = commands;
@@ -84,12 +86,20 @@ public abstract class Parser {
 		return array;
 	}
 
-	// public abstract Graphics draw() throws ParseException;
-
 	protected abstract void parseLine(String line) throws ParseException;
+	
+	public Graphics getGraphics()
+	{
+		return graphics;
+	}
+	
+	public void saveImage() throws IOException
+	{
+		graphics.saveImage();
+	}
 
 	public String drawWhole() throws ParseException {
-		while (i < nodes.size() - 1) {
+		while (i < commands.size() - 1) {
 			i++;
 			parseLine(commands.get(i));
 			// getChildren().add(nodes.get(i));
@@ -99,9 +109,12 @@ public abstract class Parser {
 
 	public String drawNextNode() throws ParseException {
 		String s = "Drawing completed";
-		if (i < nodes.size() - 1) {
+		System.out.println("In the method: ");
+		if (i < commands.size() - 1) {
 			i++;
-			parseLine(commands.get(i));
+			s = commands.get(i);
+			parseLine(s);
+			System.out.println("Drawing next node done");
 			// getChildren().add(nodes.get(i));
 		}
 		return s;

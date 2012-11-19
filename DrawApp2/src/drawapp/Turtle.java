@@ -9,11 +9,8 @@ public class Turtle {
 	private Graphics graphics;
 	private Color color = Color.BLACK;
 
-	public Turtle(Graphics graphics) {
-		this.graphics = graphics;
-	}
-
-	public void setInitialPosition(double x0, double y0, double a0) {
+	public Turtle(double x0, double y0, double a0) {
+		this.graphics = new Graphics();
 		x = x0;
 		y = y0;
 		angle = a0;

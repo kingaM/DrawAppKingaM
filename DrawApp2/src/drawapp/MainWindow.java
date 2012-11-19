@@ -19,7 +19,7 @@ import javafx.scene.shape.Rectangle;
 
 public class MainWindow extends BorderPane {
 	private TextArea text;
-	private Graphics graphics;
+	private Parser graphics;
 
 	public HBox addHBox() {
 		HBox hbox = new HBox();
@@ -42,7 +42,12 @@ public class MainWindow extends BorderPane {
 		EventHandler<ActionEvent> next = new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				postMessage(graphics.drawNextNode());
+				try {
+					postMessage(graphics.drawNextNode());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		};
 		buttonN.setOnAction(next);
@@ -62,7 +67,12 @@ public class MainWindow extends BorderPane {
 		EventHandler<ActionEvent> all = new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				postMessage(graphics.drawWhole());
+				try {
+					postMessage(graphics.drawWhole());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		};
 		buttonW.setOnAction(all);
@@ -72,12 +82,12 @@ public class MainWindow extends BorderPane {
 		EventHandler<ActionEvent> save = new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				try {
-					graphics.saveImage();
-				} catch (IOException e) {
-					postMessage(e.getMessage());
-					e.printStackTrace();
-				}
+//				try {
+//					graphics.saveImage();
+//				} catch (IOException e) {
+//					postMessage(e.getMessage());
+//					e.printStackTrace();
+//				}
 			}
 		};
 		buttonS.setOnAction(save);
@@ -107,13 +117,13 @@ public class MainWindow extends BorderPane {
 		this.setBottom(vbox);	
 	}
 	
-	public void addCanvas(Graphics graphics)
+	public void addCanvas(Parser graphics)
 	{
 		this.graphics = graphics;
 		ScrollPane scroll = new ScrollPane();
 
 		scroll.setMinSize(600, 300);
-		scroll.setContent(graphics);
+		scroll.setContent(graphics.getGraphics());
 		this.setCenter(scroll);
 	}
 
