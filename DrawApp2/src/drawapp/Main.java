@@ -32,8 +32,7 @@ public class Main extends Application {
 		try {
 			root.addCanvas(parser.draw());
 		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-			//root.postMessage(e.getMessage());
+			root.postMessage(e.getMessage());
 		}
 		try {
 			reader.close();

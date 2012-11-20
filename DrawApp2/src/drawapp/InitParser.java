@@ -15,14 +15,7 @@ public class InitParser {
 	}
 
 	public Parser draw() throws ParseException {
-		//
-		// String[] lines = {"DR 100 100 10 10", "DR 400 400 100 100",
-		// "D 100 100", "DR 800 800 10 10",
-		// "GC blue green", "DR 10 10 10 10", "DR 200 250 50 50",
-		// "DR 0 0 40 40"};
-		//
-		// for(String s : lines) ccode.add(s);
-		//
+
 
 		try {
 			String line = reader.readLine();

@@ -46,21 +46,11 @@ public class MainWindow extends BorderPane {
 					postMessage(graphics.drawNextNode());
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					postMessage(e.getMessage());
 				}
 			}
 		};
 		buttonN.setOnAction(next);
-
-//		Button buttonP = new Button("Prev Step");
-//		buttonP.setPrefSize(100, 20);
-//		EventHandler<ActionEvent> previous = new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent event) {
-//				postMessage(graphics.drawPreviousNode());
-//			}
-//		};
-//		buttonP.setOnAction(previous);
 
 		Button buttonW = new Button("Draw All");
 		buttonW.setPrefSize(100, 20);
@@ -71,7 +61,7 @@ public class MainWindow extends BorderPane {
 					postMessage(graphics.drawWhole());
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					postMessage(e.getMessage());
 				}
 			}
 		};
@@ -125,8 +115,6 @@ public class MainWindow extends BorderPane {
 		this.graphics = graphics;
 		ScrollPane scroll = new ScrollPane();
 
-		//scroll.setMaxSize(700, 400);
-		//graphics.getGraphics().setMinSize(600, 300);
 		scroll.setContent(graphics.getGraphics());
 		this.setCenter(scroll);
 	}
